@@ -54,6 +54,3 @@ Folder `vendor/` sudah disertakan, jadi tidak perlu `composer install`.
 ## Akun contoh
 - Admin: login di `/login/admin/`, NIM `admin`, kode akses `admin123`
 - Pemilih: login di `/login/pemilih/`, NIM `1001`, kode akses `pass1001`
-
-## Catatan
-Project ini dibuat saat kuliah D3 dan dirapikan seperlunya. Kode akses saat ini disimpan sebagai teks biasa, dan token CSRF belum ada pada tombol hapus/reset.
