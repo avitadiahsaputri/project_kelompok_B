@@ -11,10 +11,10 @@ Sistem memilih pasangan calon (paslon). Data yang dikelola:
 | Kebutuhan | Tabel |
 |---|---|
 | Akun admin | `admin` |
-| Daftar pemilih tetap (DPT) dan akunnya | `tbl_dpt` |
+| Daftar pemilih tetap (DPT) dan akunnya | `tbl_siswa` |
 | Kelas dan tingkat (untuk pilihan di form DPT) | `kelas` |
-| Pasangan calon, termasuk foto, visi, misi | `data_paslon` |
-| Suara yang masuk | `tbl_paslon` |
+| Pasangan calon, termasuk foto, visi, misi | `tbl_kandidat` |
+| Suara yang masuk | `tbl_pemilihan` |
 | Pengaturan pemilihan (nama lembaga, jadwal) | `pengaturan` |
 
 ## 2. Detail tabel
@@ -33,7 +33,7 @@ Tipe kolom di sini adalah usulan awal. Ubah kalau ada alasan yang lebih baik, ta
 
 Dipakai: `login/admin/index.php`, `lupa_password.php`. Aplikasi **tidak punya fitur menambah admin**, jadi isi lewat SQL.
 
-### `tbl_dpt`: pemilih tetap (sekaligus akun pemilih)
+### `tbl_siswa`: pemilih tetap (sekaligus akun pemilih)
 | Kolom | Tipe | Aturan | Keterangan |
 |---|---|---|---|
 | id | INT | PK, auto increment | |
@@ -57,7 +57,7 @@ Dipakai: `login/pemilih/index.php` (login pemilih), `sistem1/pages/dpt.php`, `pa
 
 Pasangan (`kelas`, `tingkat`) sebaiknya **unik**. Dipakai: `sistem1/view/kelas.php`, `sistem1/actions/get_class.php`.
 
-### `data_paslon`
+### `tbl_kandidat`
 | Kolom | Tipe | Aturan | Keterangan |
 |---|---|---|---|
 | id | INT | PK, auto increment | |
@@ -69,15 +69,15 @@ Pasangan (`kelas`, `tingkat`) sebaiknya **unik**. Dipakai: `sistem1/view/kelas.p
 
 Dipakai: `sistem1/pages/input_data_paslon.php`, `pages/edit.php`, `pages/vote.php`, `pages/visi_misi.php`, halaman depan.
 
-### `tbl_paslon`: suara masuk
+### `tbl_pemilihan`: suara masuk
 | Kolom | Tipe | Aturan | Keterangan |
 |---|---|---|---|
 | id | INT | PK, auto increment | |
-| nim | VARCHAR(30) | wajib | pemilih; FK ke `tbl_dpt.nim` |
+| nim | VARCHAR(30) | wajib | pemilih; FK ke `tbl_siswa.nim` |
 | nama | VARCHAR(100) | wajib | salinan nama pemilih |
 | kelas | VARCHAR(30) | | salinan |
 | tingkat | VARCHAR(30) | | salinan |
-| vote | INT | wajib | **nilai = `data_paslon.no_urut`**, bukan `id` |
+| vote | INT | wajib | **nilai = `tbl_kandidat.no_urut`**, bukan `id` |
 | waktu | VARCHAR(20) | | kode menyimpan format `H:i:sa`, contoh `09:50:38am` |
 
 Aturan: **satu NIM hanya boleh punya suara sekali** (dicek di `sistem1/pages/vote.php` lewat fungsi `sudahMemilih()` di `model/query.php`). Usul: tambahkan UNIQUE pada `nim` supaya dijamin oleh database. Nama tabelnya membingungkan (isinya suara, bukan paslon), tapi **jangan diganti** karena dipakai di banyak file.
@@ -96,9 +96,9 @@ Tombol VOTE hanya muncul kalau waktu sekarang berada di antara `mulai` dan `sele
 ## 3. Relasi
 
 ```
-kelas (kelas, tingkat) 1 ──< tbl_dpt (kelas, tingkat)
-tbl_dpt (nim)          1 ──< tbl_paslon (nim)        satu pemilih, maksimal satu suara
-data_paslon (no_urut)  1 ──< tbl_paslon (vote)       satu paslon, banyak suara
+kelas (kelas, tingkat) 1 ──< tbl_siswa (kelas, tingkat)
+tbl_siswa (nim)          1 ──< tbl_pemilihan (nim)        satu pemilih, maksimal satu suara
+tbl_kandidat (no_urut)  1 ──< tbl_pemilihan (vote)       satu paslon, banyak suara
 pengaturan             1 baris, berdiri sendiri
 admin                  berdiri sendiri
 ```
@@ -110,8 +110,8 @@ Saat ini **belum ada foreign key sama sekali** di skema.
 2. Satu pemilih hanya satu suara.
 3. Nomor urut paslon unik.
 4. Suara harus merujuk paslon yang ada.
-5. Hasil = jumlah baris `tbl_paslon` per `vote`.
-6. Reset memakai `TRUNCATE` pada `tbl_dpt`, `kelas`, `data_paslon`, dan `tbl_paslon`. **Hati-hati kalau nanti dipasang FOREIGN KEY**, karena `TRUNCATE` ditolak pada tabel yang dirujuk FK. Atur urutan reset atau ganti dengan `DELETE`, lalu bicarakan dengan tim aplikasi.
+5. Hasil = jumlah baris `tbl_pemilihan` per `vote`.
+6. Reset memakai `TRUNCATE` pada `tbl_siswa`, `kelas`, `tbl_kandidat`, dan `tbl_pemilihan`. **Hati-hati kalau nanti dipasang FOREIGN KEY**, karena `TRUNCATE` ditolak pada tabel yang dirujuk FK. Atur urutan reset atau ganti dengan `DELETE`, lalu bicarakan dengan tim aplikasi.
 
 ## 5. Yang harus dikerjakan tim database
 - [ ] Verifikasi skema `suaraipm.sql` terhadap daftar di atas.

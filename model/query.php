@@ -77,7 +77,7 @@ function ubahKodeAksesAdmin($id, $kodeBaru)
 function cariPemilih($nim, $kodeAkses)
 {
     return db_satu(
-        "SELECT * FROM tbl_dpt WHERE nim = ? AND kode_akses = ?",
+        "SELECT * FROM tbl_siswa WHERE nim = ? AND kode_akses = ?",
         'ss', [$nim, $kodeAkses]
     );
 }
@@ -103,16 +103,16 @@ function resetJadwalPemilihan()
 
 function cariPemilihDenganNim($nim)
 {
-    return db_satu("SELECT * FROM tbl_dpt WHERE nim = ?", 's', [$nim]);
+    return db_satu("SELECT * FROM tbl_siswa WHERE nim = ?", 's', [$nim]);
 }
 
 function nimPemilihSudahAda($nim, $kecualiId = null)
 {
     if ($kecualiId === null) {
-        return db_angka("SELECT COUNT(*) FROM tbl_dpt WHERE nim = ?", 's', [$nim]) > 0;
+        return db_angka("SELECT COUNT(*) FROM tbl_siswa WHERE nim = ?", 's', [$nim]) > 0;
     }
     return db_angka(
-        "SELECT COUNT(*) FROM tbl_dpt WHERE nim = ? AND id != ?",
+        "SELECT COUNT(*) FROM tbl_siswa WHERE nim = ? AND id != ?",
         'si', [$nim, (int)$kecualiId]
     ) > 0;
 }
@@ -120,7 +120,7 @@ function nimPemilihSudahAda($nim, $kecualiId = null)
 function tambahPemilih($nim, $kodeAkses, $nama, $tglLahir, $jenisKelamin, $kelas, $tingkat, $level = 'user')
 {
     return db_eksekusi(
-        "INSERT INTO tbl_dpt (nim, kode_akses, nama, tgl_lahir, jenis_kelamin, kelas, tingkat, level)
+        "INSERT INTO tbl_siswa (nim, kode_akses, nama, tgl_lahir, jenis_kelamin, kelas, tingkat, level)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
         'ssssssss', [$nim, $kodeAkses, $nama, $tglLahir, $jenisKelamin, $kelas, $tingkat, $level]
     );
@@ -129,7 +129,7 @@ function tambahPemilih($nim, $kodeAkses, $nama, $tglLahir, $jenisKelamin, $kelas
 function ubahPemilih($id, $nim, $nama, $kodeAkses, $tglLahir, $jenisKelamin, $kelas, $tingkat)
 {
     return db_eksekusi(
-        "UPDATE tbl_dpt SET nim = ?, nama = ?, kode_akses = ?, tgl_lahir = ?, jenis_kelamin = ?, kelas = ?, tingkat = ?
+        "UPDATE tbl_siswa SET nim = ?, nama = ?, kode_akses = ?, tgl_lahir = ?, jenis_kelamin = ?, kelas = ?, tingkat = ?
          WHERE id = ?",
         'sssssssi', [$nim, $nama, $kodeAkses, $tglLahir, $jenisKelamin, $kelas, $tingkat, (int)$id]
     );
@@ -137,38 +137,38 @@ function ubahPemilih($id, $nim, $nama, $kodeAkses, $tglLahir, $jenisKelamin, $ke
 
 function hapusPemilih($id)
 {
-    return db_eksekusi("DELETE FROM tbl_dpt WHERE id = ?", 'i', [(int)$id]);
+    return db_eksekusi("DELETE FROM tbl_siswa WHERE id = ?", 'i', [(int)$id]);
 }
 
 function hapusSemuaPemilih()
 {
-    return db_eksekusi("TRUNCATE TABLE tbl_dpt");
+    return db_eksekusi("TRUNCATE TABLE tbl_siswa");
 }
 
 function cariDaftarPemilih($cari = null, $tingkat = null)
 {
     if ($cari !== null) {
-        return db_semua("SELECT * FROM tbl_dpt WHERE nama LIKE ?", 's', ['%' . $cari . '%']);
+        return db_semua("SELECT * FROM tbl_siswa WHERE nama LIKE ?", 's', ['%' . $cari . '%']);
     }
     if ($tingkat !== null) {
-        return db_semua("SELECT * FROM tbl_dpt WHERE tingkat = ? ORDER BY nama ASC", 's', [$tingkat]);
+        return db_semua("SELECT * FROM tbl_siswa WHERE tingkat = ? ORDER BY nama ASC", 's', [$tingkat]);
     }
-    return db_semua("SELECT * FROM tbl_dpt ORDER BY nim ASC");
+    return db_semua("SELECT * FROM tbl_siswa ORDER BY nim ASC");
 }
 
 function ambilNamaPemilih()
 {
-    return array_column(db_semua("SELECT nama FROM tbl_dpt"), 'nama');
+    return array_column(db_semua("SELECT nama FROM tbl_siswa"), 'nama');
 }
 
 function namaPemilihAda($nama)
 {
-    return db_angka("SELECT COUNT(*) FROM tbl_dpt WHERE nama = ?", 's', [$nama]) > 0;
+    return db_angka("SELECT COUNT(*) FROM tbl_siswa WHERE nama = ?", 's', [$nama]) > 0;
 }
 
 function hitungPemilih()
 {
-    return db_angka("SELECT COUNT(*) FROM tbl_dpt WHERE level = 'user'");
+    return db_angka("SELECT COUNT(*) FROM tbl_siswa WHERE level = 'user'");
 }
 
 
@@ -214,41 +214,41 @@ function hapusSemuaKelas()
 
 function ambilSemuaPaslon($urutkan = true)
 {
-    return db_semua("SELECT * FROM data_paslon" . ($urutkan ? " ORDER BY no_urut ASC" : ""));
+    return db_semua("SELECT * FROM tbl_kandidat" . ($urutkan ? " ORDER BY no_urut ASC" : ""));
 }
 
 function ambilPaslon($id)
 {
-    return db_satu("SELECT * FROM data_paslon WHERE id = ?", 'i', [(int)$id]);
+    return db_satu("SELECT * FROM tbl_kandidat WHERE id = ?", 'i', [(int)$id]);
 }
 
 function daftarNomorUrut()
 {
     return array_column(
-        db_semua("SELECT DISTINCT no_urut FROM data_paslon ORDER BY no_urut ASC"),
+        db_semua("SELECT DISTINCT no_urut FROM tbl_kandidat ORDER BY no_urut ASC"),
         'no_urut'
     );
 }
 
 function hitungPaslon()
 {
-    return db_angka("SELECT COUNT(*) FROM data_paslon");
+    return db_angka("SELECT COUNT(*) FROM tbl_kandidat");
 }
 
 function nomorUrutSudahAda($noUrut)
 {
-    return db_angka("SELECT COUNT(*) FROM data_paslon WHERE no_urut = ?", 's', [$noUrut]) > 0;
+    return db_angka("SELECT COUNT(*) FROM tbl_kandidat WHERE no_urut = ?", 's', [$noUrut]) > 0;
 }
 
 function namaPaslonSudahAda($nama)
 {
-    return db_angka("SELECT COUNT(*) FROM data_paslon WHERE nm_paslon = ?", 's', [$nama]) > 0;
+    return db_angka("SELECT COUNT(*) FROM tbl_kandidat WHERE nm_paslon = ?", 's', [$nama]) > 0;
 }
 
 function tambahPaslon($noUrut, $nama, $gambar, $visi, $misi)
 {
     return db_eksekusi(
-        "INSERT INTO data_paslon (no_urut, nm_paslon, gambar1, visi, misi) VALUES (?, ?, ?, ?, ?)",
+        "INSERT INTO tbl_kandidat (no_urut, nm_paslon, gambar1, visi, misi) VALUES (?, ?, ?, ?, ?)",
         'sssss', [$noUrut, $nama, $gambar, $visi, $misi]
     );
 }
@@ -256,25 +256,25 @@ function tambahPaslon($noUrut, $nama, $gambar, $visi, $misi)
 function ubahPaslon($id, $noUrut, $nama, $gambar, $visi, $misi)
 {
     return db_eksekusi(
-        "UPDATE data_paslon SET no_urut = ?, nm_paslon = ?, gambar1 = ?, visi = ?, misi = ? WHERE id = ?",
+        "UPDATE tbl_kandidat SET no_urut = ?, nm_paslon = ?, gambar1 = ?, visi = ?, misi = ? WHERE id = ?",
         'sssssi', [$noUrut, $nama, $gambar, $visi, $misi, (int)$id]
     );
 }
 
 function hapusPaslon($id)
 {
-    return db_eksekusi("DELETE FROM data_paslon WHERE id = ?", 'i', [(int)$id]);
+    return db_eksekusi("DELETE FROM tbl_kandidat WHERE id = ?", 'i', [(int)$id]);
 }
 
 function hapusSemuaPaslon()
 {
-    return db_eksekusi("TRUNCATE TABLE data_paslon");
+    return db_eksekusi("TRUNCATE TABLE tbl_kandidat");
 }
 
 
 function cariSuara($nim)
 {
-    return db_satu("SELECT * FROM tbl_paslon WHERE nim = ? LIMIT 1", 's', [$nim]);
+    return db_satu("SELECT * FROM tbl_pemilihan WHERE nim = ? LIMIT 1", 's', [$nim]);
 }
 
 function sudahMemilih($nim)
@@ -287,7 +287,7 @@ function simpanSuara($nim, $nama, $kelas, $tingkat, array $pilihan, $waktu)
     $ok = true;
     foreach ($pilihan as $noUrut) {
         $stmt = db_jalankan(
-            "INSERT INTO tbl_paslon (nim, nama, kelas, tingkat, vote, waktu) VALUES (?, ?, ?, ?, ?, ?)",
+            "INSERT INTO tbl_pemilihan (nim, nama, kelas, tingkat, vote, waktu) VALUES (?, ?, ?, ?, ?, ?)",
             'ssssis', [$nim, $nama, $kelas, $tingkat, (int)$noUrut, $waktu]
         );
         $ok = $ok && mysqli_stmt_affected_rows($stmt) === 1;
@@ -298,40 +298,40 @@ function simpanSuara($nim, $nama, $kelas, $tingkat, array $pilihan, $waktu)
 
 function ambilSemuaSuara()
 {
-    return db_semua("SELECT * FROM tbl_paslon ORDER BY id ASC");
+    return db_semua("SELECT * FROM tbl_pemilihan ORDER BY id ASC");
 }
 
 function ambilSuaraHalaman($mulai, $jumlah)
 {
-    return db_semua("SELECT * FROM tbl_paslon LIMIT ?, ?", 'ii', [(int)$mulai, (int)$jumlah]);
+    return db_semua("SELECT * FROM tbl_pemilihan LIMIT ?, ?", 'ii', [(int)$mulai, (int)$jumlah]);
 }
 
 function ambilSuaraPaslon($noUrut)
 {
-    return db_semua("SELECT * FROM tbl_paslon WHERE vote = ?", 's', [$noUrut]);
+    return db_semua("SELECT * FROM tbl_pemilihan WHERE vote = ?", 's', [$noUrut]);
 }
 
 function ambilSuaraUrutPilihan()
 {
-    return db_semua("SELECT * FROM tbl_paslon ORDER BY vote ASC");
+    return db_semua("SELECT * FROM tbl_pemilihan ORDER BY vote ASC");
 }
 
 function hitungSuaraPaslon($noUrut)
 {
-    return db_angka("SELECT COUNT(*) FROM tbl_paslon WHERE vote = ?", 's', [$noUrut]);
+    return db_angka("SELECT COUNT(*) FROM tbl_pemilihan WHERE vote = ?", 's', [$noUrut]);
 }
 
 function hitungSemuaSuara()
 {
-    return db_angka("SELECT COUNT(*) FROM tbl_paslon");
+    return db_angka("SELECT COUNT(*) FROM tbl_pemilihan");
 }
 
 function hitungPemilihYangMemilih()
 {
-    return db_angka("SELECT COUNT(DISTINCT nim) FROM tbl_paslon");
+    return db_angka("SELECT COUNT(DISTINCT nim) FROM tbl_pemilihan");
 }
 
 function hapusSemuaSuara()
 {
-    return db_eksekusi("TRUNCATE TABLE tbl_paslon");
+    return db_eksekusi("TRUNCATE TABLE tbl_pemilihan");
 }

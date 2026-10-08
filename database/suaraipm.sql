@@ -5,7 +5,7 @@
 CREATE DATABASE IF NOT EXISTS suaraipm CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE suaraipm;
 
-DROP TABLE IF EXISTS tbl_paslon, tbl_dpt, data_paslon, kelas, pengaturan, admin;
+DROP TABLE IF EXISTS tbl_pemilihan, tbl_siswa, tbl_kandidat, kelas, pengaturan, admin;
 
 -- Akun admin (login di /login/admin/ memakai nim + kode_akses)
 CREATE TABLE admin (
@@ -27,7 +27,7 @@ CREATE TABLE pengaturan (
 );
 
 -- Daftar pemilih tetap (DPT)
-CREATE TABLE tbl_dpt (
+CREATE TABLE tbl_siswa (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nim VARCHAR(30) NOT NULL,
   kode_akses VARCHAR(50) NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE tbl_dpt (
 );
 
 -- Pasangan calon
-CREATE TABLE data_paslon (
+CREATE TABLE tbl_kandidat (
   id INT AUTO_INCREMENT PRIMARY KEY,
   no_urut INT NOT NULL,
   nm_paslon VARCHAR(150) NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE data_paslon (
 );
 
 -- Suara masuk (kolom vote berisi no_urut paslon yang dipilih)
-CREATE TABLE tbl_paslon (
+CREATE TABLE tbl_pemilihan (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nim VARCHAR(30) NOT NULL,
   nama VARCHAR(100) NOT NULL,
@@ -76,11 +76,11 @@ VALUES (1, 'Pemilihan Contoh', 'admin@example.com', '2024-01-01 08:00:00', '2030
 
 INSERT INTO kelas (kelas, tingkat) VALUES ('A', '1'), ('B', '1');
 
-INSERT INTO tbl_dpt (nim, kode_akses, nama, tgl_lahir, jenis_kelamin, kelas, tingkat, level) VALUES
+INSERT INTO tbl_siswa (nim, kode_akses, nama, tgl_lahir, jenis_kelamin, kelas, tingkat, level) VALUES
 ('1001', 'pass1001', 'Pemilih Satu', '2005-01-01', 'Laki-laki', 'A', '1', 'user'),
 ('1002', 'pass1002', 'Pemilih Dua',  '2005-02-02', 'Perempuan', 'A', '1', 'user'),
 ('1003', 'pass1003', 'Pemilih Tiga', '2005-03-03', 'Laki-laki', 'B', '1', 'user');
 
-INSERT INTO data_paslon (no_urut, nm_paslon, gambar1, visi, misi) VALUES
+INSERT INTO tbl_kandidat (no_urut, nm_paslon, gambar1, visi, misi) VALUES
 (1, 'Paslon Satu', 'calon-1.png', 'Visi paslon satu', 'Misi paslon satu'),
 (2, 'Paslon Dua',  'calon-2.png', 'Visi paslon dua',  'Misi paslon dua');

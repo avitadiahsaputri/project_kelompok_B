@@ -17,7 +17,7 @@ Aplikasi pemilihan online berbasis web untuk memilih pasangan calon (paslon). Di
 |---|---|
 | `index.php` | Halaman depan (landing page) |
 | `login/admin/` | Halaman login admin (dicek ke tabel `admin`) |
-| `login/pemilih/` | Halaman login pemilih (dicek ke tabel `tbl_dpt`) |
+| `login/pemilih/` | Halaman login pemilih (dicek ke tabel `tbl_siswa`) |
 | `.htaccess` | Aturan Apache: matikan daftar isi folder, tutup akses web ke `model/`, `database/`, dan file konfigurasi |
 | `sistem1/index.php` | Dashboard setelah login (admin dan pemilih) |
 | `sistem1/pages/` | Halaman yang tampil: data pemilih, kandidat, data suara, hasil suara, voting, visi misi, cetak |
