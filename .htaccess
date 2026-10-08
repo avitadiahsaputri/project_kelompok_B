@@ -1,0 +1,9 @@
+# Pengaturan server Apache (dibaca otomatis oleh XAMPP dan kebanyakan hosting).
+
+# Jangan tampilkan daftar isi folder ke pengunjung.
+Options -Indexes
+
+# File konfigurasi dan pengelola paket tidak boleh dibuka lewat browser.
+<FilesMatch "^(config\..*\.php|composer\.(json|lock)|\.gitignore|README\.md)$">
+    Require all denied
+</FilesMatch>

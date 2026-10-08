@@ -1,0 +1,367 @@
+
+        :root {
+            --poppins: "Poppins", sans-serif;
+            --lato: "Lato", sans-serif;
+            --light: #f9f9f9;
+            --blue: #3c91e6;
+            --light-blue: #cfe8ff;
+            --grey: #eee;
+            --dark-grey: #aaaaaa;
+            --dark: #342e37;
+            --red: #db504a;
+            --yellow: #ffce26;
+            --light-yellow: #fff2c6;
+            --orange: #fd7238;
+            --light-orange: #ffe0d3;
+        }
+
+
+.nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s ease;
+            text-align: center;
+        }
+
+
+@media (max-width: 768px) {
+
+    .nav-link {
+        font-size: 14px;
+    }
+}
+
+
+.order .class {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .class {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            padding: 16px;
+            border-radius: 4px;
+        }
+
+        .class input[type="submit"],
+        .table-data .order .container form input[type="submit"],
+        .table-data .order form input[type="submit"] {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .table-data .order .container form input[type="submit"]:hover,
+        .table-data .order form input[type="submit"]:hover,
+        .class input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        .container select {
+            flex: 1;
+            margin-right: 8px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 250px;
+        }
+
+        .container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #f8f9fa;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar a,
+        .sidebar li {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover,
+        .sidebar li:hover {
+            color: inherit;
+            background-color: inherit;
+            text-decoration: none;
+        }
+
+        @media screen and (max-width: 1000px) {
+            .container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .container select,
+            .container input[type="submit"] {
+                margin-right: 0;
+                margin-bottom: 8px;
+                width: 100%;
+            }
+        }
+.btn {
+    display: inline-block;
+    font-size: 16px;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+
+.btn-success {
+            width: 100%;
+            padding: 8px 16px;
+            border-radius: 4px;
+        }
+
+        
+        .table-data .order {
+            background-color: rgba(0, 128, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .table-data {
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        .order .head {
+            text-align: center;
+        }
+
+        .order .head h2 {
+            margin-top: 0;
+            color: var(--dark);
+        }
+
+        .order .head p {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .order .head marquee {
+            color: black;
+        }
+
+        @keyframes swayI {
+            0%, 100% { transform: rotateZ(-9deg); }
+            50% { transform: rotateZ(5deg); }
+        }
+
+        @keyframes swayP {
+            0%, 100% { transform: rotateZ(5deg); }
+            50% { transform: rotateZ(-9deg); }
+        }
+
+        @keyframes glow-i {
+            0%, 100% { color: red; }
+            33% { color: yellow; }
+            66% { color: green; }
+        }
+
+        @keyframes glow-p {
+            0%, 75% { color: yellow; }
+            100% { color: green; }
+            50% { color: red; }
+        }
+
+        @keyframes glow-m {
+            0%, 100% { color: green; }
+            33% { color: red; }
+            66% { color: yellow; }
+        }
+
+        @keyframes swayM {
+            0%, 100% { transform: translateY(0); }
+            25% { transform: translateY(-5px); }
+            50% { transform: translateZ(10px); }
+            75% { transform: translateY(-5px); }
+        }
+
+        @keyframes jumpDot {
+            0%, 100% { transform: translateZ(0); }
+            25% { transform: translateY(-10px); }
+            50% { transform: translateZ(5px); }
+            75% { transform: translateY(-5px); }
+        }
+
+        #swaying-i, #swaying-p, #falling-m, #jumping-dots, #jumping-dots1 {
+            display: inline-block;
+        }
+
+        #swaying-i {
+            animation: swayI 1s infinite alternate, glow-i 2s infinite;
+        }
+
+        #swaying-p {
+            animation: swayP 1s infinite alternate, glow-p 2s infinite;
+        }
+
+        #falling-m {
+            animation: swayM 1s infinite alternate, glow-m 2s infinite;
+        }
+
+        #jumping-dots {
+            animation: jumpDot 1s infinite;
+        }
+
+        #jumping-dots1 {
+            animation: jumpDot 2s infinite;
+        }
+
+        #mygraph, #mygraph11 {
+            width: 100%;
+            height: 500px;
+            margin-bottom: 20px;
+        }
+
+        
+.btn.btn-primary {
+    background-color: #4CAF50;
+}
+
+.btn.btn-primary:hover {
+    background-color: #45a049;
+}
+
+.profile {
+    position: relative;
+    cursor: pointer;
+}
+
+.profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: border-color 0.3s;
+}
+
+.profile img.active {
+    border: 2px solid green;
+}
+
+.profile-popup {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    z-index: 100;
+    width: 300px;
+}
+
+
+.profile-popup.active {
+    display: block;
+}
+
+.profile-popup h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.profile-popup p {
+    margin: 5px 0;
+    text-align: left;
+}
+
+.profile-popup .role {
+    margin-top: 15px;
+    padding: 5px 10px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #28a745;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-popup .role:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: skewX(45deg) translateX(-80%);
+    transition: transform 0.3s;
+}
+
+
+.profile-popup .role:hover:before {
+    transform: skewX(45deg) translateX(80%);
+}
+
+.profile-popup h3 {
+    font-weight: bold;
+}
+
+.profile-popup.user p:nth-of-type(1),
+.profile-popup.user p:nth-of-type(2),
+.profile-popup.user p:nth-of-type(3),
+.profile-popup.user p:nth-of-type(4),
+.profile-popup.user p:nth-of-type(5) {
+    color: #ccc;
+}
+
+ .profile-popup.user p span {
+    display: inline-block;
+    width: 100px;
+    text-align: left
+    margin-right: 10px;
+}
+.profile-popup.non-user p:nth-last-of-type(2) {
+    font-weight: bold;
+}
+.profile-popup.non-user p:nth-of-type(1) {
+    margin-bottom: 5px;
+    font-size: 14px;
+    text-align: center;
+    color: #ccc;
+}
+.profile-popup.non-user p:nth-of-type(2) {
+    font-size: 12px;
+    color: #ccc;
+    text-align: center;
+    font-style: italic;
+}
