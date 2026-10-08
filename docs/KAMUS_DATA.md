@@ -116,13 +116,3 @@ Tulis keputusan di kolom **Keputusan**.
 | 5 | Aturan "satu pemilih satu suara" dijamin juga oleh database (aturan unik), bukan hanya oleh kode? | |
 | 6 | `kode_akses` disimpan teks biasa. Dienkripsi (hash)? | |
 | 7 | Perlu kebutuhan baru, misalnya beberapa periode pemilihan atau log perubahan? | |
-
-## 6. Catatan nama tabel
-
-Nama tabel mengikuti skema lama (`database/skema-lama-suaraipm.png`). Kalau membaca dokumen atau kode versi sebelumnya, padanannya:
-
-| Dulu di kode | Sekarang |
-|---|---|
-| `tbl_dpt` | `tbl_siswa` |
-| `tbl_paslon` | `tbl_pemilihan` |
-| `data_paslon` | `tbl_kandidat` |
