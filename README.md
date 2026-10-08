@@ -29,7 +29,7 @@ Aplikasi pemilihan online berbasis web untuk memilih pasangan calon (paslon). Di
 | `model/url.php` | Membuat alamat yang benar dari folder mana pun (`urlProyek()`, `urlSistem()`) |
 | `koneksi.php` | Membuat koneksi database (membaca `config.local.php`, atau `config.example.php` bila belum ada) |
 | `config.example.php` | Contoh pengaturan database. Salin jadi `config.local.php` bila MySQL kamu berbeda dari bawaan XAMPP |
-| `database/` | `suaraipm.sql` (skema + data contoh) dan `SPESIFIKASI_DATABASE.md` |
+| `database/` | Tempat file SQL database, dibuat oleh kelompok (daftar tabel dan kolom ada di `docs/KAMUS_DATA.md`) |
 | `assets/` | File statis menurut jenisnya: `css/` (base, components, pages), `js/`, `img/`, `fonts/`, `lib/` (library pihak ketiga) |
 | `sistem1/assets/`, `sistem1/foto/` | Aset panel admin dan foto paslon yang diunggah |
 | `vendor/` | Library Composer: PhpSpreadsheet (Excel) dan PHPMailer (email) |
@@ -45,7 +45,7 @@ Kebutuhan: PHP 8.x, ekstensi `mysqli`, `gd`, `zip` (untuk Excel), MySQL/MariaDB.
 1. Pasang XAMPP, nyalakan **Apache** dan **MySQL**.
 2. Di `xampp/php/php.ini` pastikan baris `extension=gd` dan `extension=zip` aktif (tanpa tanda `;`), lalu restart Apache.
 3. Salin folder project ke `xampp/htdocs/`.
-4. Buka `http://localhost/phpmyadmin`, buat database `suaraipm`, lalu **Import** file `database/suaraipm.sql`.
+4. Buka `http://localhost/phpmyadmin`, buat database `suaraipm`, lalu **Import** file SQL dari folder `database/` setelah kelompok selesai membuatnya.
 5. Pengaturan database: kalau MySQL kamu bawaan XAMPP (user `root`, tanpa password), tidak perlu mengubah apa pun. Kalau berbeda, salin `config.example.php` menjadi `config.local.php` lalu isi sesuai MySQL kamu (file ini tidak ikut Git).
 6. Buka `http://localhost/project_kelompok_B/`.
 
