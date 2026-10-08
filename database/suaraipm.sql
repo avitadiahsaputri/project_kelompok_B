@@ -82,5 +82,5 @@ INSERT INTO tbl_dpt (nim, kode_akses, nama, tgl_lahir, jenis_kelamin, kelas, tin
 ('1003', 'pass1003', 'Pemilih Tiga', '2005-03-03', 'Laki-laki', 'B', '1', 'user');
 
 INSERT INTO data_paslon (no_urut, nm_paslon, gambar1, visi, misi) VALUES
-(1, 'Paslon Satu', NULL, 'Visi paslon satu', 'Misi paslon satu'),
-(2, 'Paslon Dua',  NULL, 'Visi paslon dua',  'Misi paslon dua');
+(1, 'Paslon Satu', 'calon-1.png', 'Visi paslon satu', 'Misi paslon satu'),
+(2, 'Paslon Dua',  'calon-2.png', 'Visi paslon dua',  'Misi paslon dua');
