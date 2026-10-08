@@ -46,7 +46,7 @@ Kebutuhan: PHP 8.x, ekstensi `mysqli`, `gd`, `zip` (untuk Excel), MySQL/MariaDB.
 2. Di `xampp/php/php.ini` pastikan baris `extension=gd` dan `extension=zip` aktif (tanpa tanda `;`), lalu restart Apache.
 3. Salin folder project ke `xampp/htdocs/`.
 4. Buka `http://localhost/phpmyadmin`, buat database `suaraipm`, lalu **Import** file SQL dari folder `database/` setelah kelompok selesai membuatnya.
-5. Pengaturan database: kalau MySQL kamu bawaan XAMPP (user `root`, tanpa password), tidak perlu mengubah apa pun. Kalau berbeda, salin `config.example.php` menjadi `config.local.php` lalu isi sesuai MySQL kamu (file ini tidak ikut Git).
+5. Pengaturan database: kalau MySQL kamu bawaan XAMPP (user `root`, tanpa password), tidak perlu mengubah apa pun. Kalau berbeda, salin `config.example.php` menjadi `config.local.php` lalu isi sesuai MySQL kamu.
 6. Buka `http://localhost/project_kelompok_B/`.
 
 Folder `vendor/` sudah disertakan, jadi tidak perlu `composer install`.
